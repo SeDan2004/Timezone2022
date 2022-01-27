@@ -1,0 +1,2 @@
+name:Sergey
+age:30

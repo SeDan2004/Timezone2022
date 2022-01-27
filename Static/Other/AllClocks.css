@@ -1,0 +1,285 @@
+.Vitrina {
+  position: relative;
+  top: 97px;
+  height: 500px;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.headerVitrina {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 1rem;
+  align-items: baseline;
+  height: 100px;
+}
+
+.VitrinaContent {
+  display: grid;
+  width: 90%;
+  margin: 25px auto;
+}
+
+.headerVitrina:first-child {
+  padding-left: 29px;
+  font-size: 3rem;
+}
+
+.countSelect {
+  margin-left: 3.5rem;
+  width: 232px;
+}
+
+.countButton {
+  width: inherit;
+  margin-bottom: 0rem;
+  text-align: center;
+}
+
+.countOp {
+  visibility: visible;
+  position: relative;
+  top: -8rem;
+  text-align: center;
+}
+
+.countSelect h5:hover {
+  background-color: navy;
+  color: white;
+  transition: 0.5s;
+}
+
+.selects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.options {
+  z-index: 1;
+  visibility: hidden;
+  width: inherit;
+  overflow-y: hidden;
+}
+
+.options h5 {
+  width: 95%;
+  height: 40px;
+  border: 0.5px solid none;
+  border-bottom: 0.5px solid lime;
+  padding-top: 0.5rem;
+  font-size: 1.15rem;
+  margin-bottom: 0px;
+  font-weight: 500;
+  background: linear-gradient(100.17deg, 
+  rgba(255, 255, 255, 0.1) 99.84%, 
+  rgba(255, 255, 255, 0) 100%), 
+  #000000;
+  color: lime;
+  margin: 0 auto;
+  border-top: none;
+  cursor: pointer;
+}
+
+.options h5:last-child {
+  border-radius: 0px 0px 10px 10px;
+  border-bottom: none;
+}
+
+.brandOp {
+  visibility: visible;
+  position: relative;
+  top: -30rem;
+}
+
+.sortOp {
+  visibility: visible;
+  position: relative;
+  top: -8rem;
+}
+
+.sortSelect {
+  width: 230px;
+  margin-left: 3rem;
+  text-align: center;
+}
+
+.sortSelect h5:hover {
+  background-color: navy;
+  color: white;
+  transition: 0.5s;
+}
+
+.sortButton {
+  width: inherit;
+  margin-bottom: 0px;
+}
+
+.brandSelect {
+  text-align: center;
+  width: 222px;
+  margin-left: 3rem;
+}
+
+.brandSelect h5:hover {
+  background-color: navy;
+  color: white;
+  transition: 0.5s;
+}
+
+.brandButton {
+  width: inherit;
+  margin-bottom: 0rem;
+}
+
+.headerVitrina h3 {
+  border-bottom: 2px solid;
+  transition: 0.3s;
+  user-select: none;
+  padding-bottom: 5px;
+  box-sizing: border-box;
+}
+
+.MenuFilter {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  opacity: 0%;
+  margin: 0 auto;
+  width: 90%;
+  transition: 0.5s;
+}
+
+.CheckFilter {
+  margin-top: 2rem;
+  width: 90%;
+  margin: 2rem auto;
+  color: blueviolet;
+}
+
+.AcceptAndDeleteFilter {
+  display: flex;
+  flex-direction: row;
+}
+
+.DeleteFilter, .AcceptFilter, .ClearFilter {
+  background-color: gold;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  transition: 0.3s;
+  text-align: center;
+  user-select: none;
+}
+
+.DeleteFilter p, .AcceptFilter p, .ClearFilter p {
+  margin: 0 auto;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.AcceptFilter {
+  margin-left: 1rem;
+}
+
+.ClearFilter {
+  margin-left: 1rem;
+}
+
+/*background-color: rgb(200, 170, 0);*/
+
+.DeleteFilter:hover, .AcceptFilter:hover, .ClearFilter:hover {
+  background-color: rgb(200, 170, 0);
+}
+
+.DeleteFilter:not(:hover), .AcceptFilter:not(:hover), .ClearFilter:not(:hover) {
+  background-color: gold;
+}
+
+.VitrinaTovar {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 4rem;
+}
+
+.VitrinaTovar img {
+  width: 215px;
+  height: 330px;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  cursor: pointer
+}
+
+.VitrinaTovar input {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  border: none;
+  transition: 0.4s;
+}
+
+.VitrinaTovar input:hover {
+  background-color: green;
+}
+
+
+
+.VitrinaFooter {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  height: 100%;
+  background-color: rgb(26, 23, 23);
+  color: silver;
+}
+
+.ShowCountClock {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  white-space: nowrap;
+}
+
+.ShowCountClock h5 {
+  margin-left: 1.5rem;
+  cursor: pointer;
+}
+
+.ShowCountClock h5:hover {
+  color: lime;
+}
+
+.ShowCountClock h3 {
+  user-select: none;
+}
+
+.back {
+  margin-left: 1rem;
+  padding-top: 0.5rem;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.next {
+  margin-left: 2rem;
+  padding-top: 0.5rem;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.back:hover {
+  color: lime;
+}
+
+.next:hover {
+  color: lime;
+}

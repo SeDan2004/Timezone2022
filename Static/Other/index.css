@@ -1,0 +1,434 @@
+.wrapper {
+  padding-top: 2%;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+  opacity: 0%;
+  position: fixed;
+  transition: 0.8s;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 3;
+}
+
+.TovarBox {
+  margin: 0 auto;
+  background-color: white;
+  width: 40%;
+  height: 97%;
+  overflow: hidden;
+  overflow-y: scroll
+}
+
+/* .TovarBox::-webkit-scrollbar {
+  width: 0;
+} */
+
+ .TovarBoxHeader.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.TovarBoxHeader {
+  height: 10%;
+  align-items: center;
+  border-bottom: 1px solid black;
+  white-space: nowrap;
+}
+
+.TovarBoxHeader h4 {
+  padding-top: 0.5rem;
+}
+
+.TovarBoxHeader input {
+  background-color: red;
+  color: white;
+  height: 45px;
+  width: 45px;
+  font-size: 1.5rem;
+  border-radius: 25px;
+  text-align: center;
+  margin-left: -1rem;
+  padding-left: -0.5rem;
+  transition: 0.5s;
+}
+
+.TovarBoxHeader input:hover {
+  transform: rotate(360deg);
+}
+
+.TovarBoxContent {
+  height: 82%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.TovarBoxContent img {
+  margin-top: 1rem;
+  width: 200px;
+  height: 280px;
+}
+
+.Inf {
+  border-top: 1px solid silver;
+  height: 120px;
+  width: 85%;
+  margin-top: 4%;
+  padding-top: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.Inf h4 {
+  padding-top: 0.5rem;
+}
+
+
+
+.TovarBoxFooter {
+  height: 9%;
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+
+.TovarBoxFooter input {
+  margin-top: 0.3rem;
+  background-color: red;
+  height: 36px;
+  color: white;
+  transition: 0.3s;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  font-weight: 500;
+  border: none;
+  margin-right: 1rem;
+}
+
+.TovarBoxFooter input:hover {
+  background-color: green;
+}
+
+.CommentArea {
+  margin-top: 1rem;
+}
+
+.HeaderComment {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin: 0 auto;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.countComments {
+  margin-left: 2rem;
+}
+
+.HeaderComment h5:last-child {
+  margin-left: 0.5rem;
+  border-bottom: 1px solid;
+}
+
+.CommentDiv {
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.UserComment {
+  margin-top: 1.5rem;
+  background-color: rgb(192, 192, 192);
+  border-radius: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.UserCommentHeader {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.UserName {
+  display: inline;
+  margin-top: 0.5rem;
+  margin-left: 3%;
+  color: blue;
+  border-bottom: 1px solid blue;
+  padding-bottom: 1px;
+}
+
+.UserCommentContent {
+  width: 100%;
+  margin-top: 0.5rem;
+  word-wrap: break-word;
+  color: blue;
+  font-family: cursive;
+}
+
+.UserCommentContent h5 {
+  margin-left: 3%;
+}
+
+.StarsDiv {
+  top: 0.3rem;
+  margin-left: 74%;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+}
+
+.CommentStar {
+  position: relative;
+  top: 2px
+}
+
+.UserCommentFooter {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Like {
+  background-color: black;
+  color: white;
+  margin-left: 1rem;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  padding-top: 0.3rem;
+  cursor: pointer;
+}
+
+.LikeValue {
+  margin-left: 0.5rem;
+  color: green;
+}
+
+.Dislike {
+  background-color: black;
+  color: white;
+  margin-left: 1rem;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  padding-top: 0.3rem;
+  cursor: pointer;
+}
+
+.Like, .Dislike {
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+.DislikeValue {
+  margin-left: 0.5rem;
+  color: red;
+}
+
+.Like h4 {
+  margin-top: -0.6rem;
+}
+
+.Dislike h4 {
+  margin-top: -0.9rem;
+}
+
+.Like h4, .Dislike h4 {
+  font-size: 2.5rem;
+}
+
+.Like:hover {
+  background-color: green;
+  color: white;
+}
+
+.Dislike:hover {
+  background-color: red;
+  color: white;
+}
+
+.OpenThreades {
+  margin-top: -0.2rem;
+  margin-left: 0.5rem;
+  background-color: gold;
+  color: black;
+  font-weight: 400;
+  border: none;
+  transition: 0.3s;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.OpenThreades:hover {
+  background-color: rgb(182, 155, 0);
+}
+
+.DateDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  border-top: 1px solid darkgoldenrod;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-right: 1%;
+}
+
+.DateH5 {
+  margin-left: -1rem;
+  margin-top: 0.4rem;
+  color: blue;
+  border-bottom: 1px solid blue;
+  padding-bottom: 2px;
+}
+
+.NavigateCommentButtons {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+}
+
+.LeftArrow, .RightArrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 40px;
+  width: 40px;
+  background-color: blue;
+  border-radius: 50%;
+  margin-bottom: 0.3rem;
+  cursor: pointer;
+}
+
+.LeftArrow {
+  visibility: hidden;
+}
+
+.RightArrow {
+  margin-left: 0.5rem;
+  margin-right: 1.5rem;
+}
+
+.LeftArrow::before,
+.RightArrow::before {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  content: '';
+}
+
+.LeftArrow::before {
+  left: 12px;
+  border-left: 5px solid white;
+  border-top: 5px solid white;
+  transform: rotate(-45deg);
+}
+
+.RightArrow::before {
+  left: 7px;
+  border-right: 5px solid white;
+  border-top: 5px solid white;
+  transform: rotate(45deg);
+}
+
+.LeftArrow:hover,
+.RightArrow:hover {
+  background-color: limegreen;
+}
+
+.LeftArrow:hover:before,
+.RightArrow:hover:before {
+  border-color: rgb(47, 46, 46);
+}
+
+.WriteCommentDiv {
+  border-top: 1px solid black;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.WriteCommentDiv h3 {
+  margin-top: 1rem;
+}
+
+.WriteCommentDiv .TextWarning {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  height: 1.2rem;
+  justify-content: left;
+  font-weight: 800;
+  color: red;
+}
+
+.WriteCommentDiv .TextWarning p {
+  opacity: 0%;
+  margin-top: 1rem;
+  cursor: default;
+  user-select: none;
+}
+
+.WriteCommentDiv textarea {
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
+  height: auto;
+  resize: none;
+  outline: none;
+  box-shadow: 0px 0px 3px inset;
+}
+
+.WriteCommentDiv div {
+  margin-top: -0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+}
+
+.WriteCommentDiv div h1{
+  position: relative;
+  cursor: pointer;
+}
+
+.WriteCommentDiv div input {
+  background-color: gold;
+  font-weight: 600;
+  border: none;
+  transition: 0.3s;
+  border-radius: 10px;
+  color: black;
+  font-size: 1.3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.WriteCommentDiv div input:hover {
+  background-color: rgb(182, 155, 0);
+}
+
+.WriteCommentDiv div input:last-child {
+  margin-left: 1rem;
+}
+
+.Star {
+  user-select: none;
+}
