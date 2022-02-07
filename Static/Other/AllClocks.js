@@ -150,6 +150,8 @@ function RenderFunc(arg)
 
     price = parseFloat(CurrentClock[10]).toLocaleString() + " Руб";
 
+    div.setAttribute('id', CurrentClock[2]);
+
     div.classList.add('VitrinaTovar');
     img.src = CurrentClock[CurrentClock.length - 1];
     span.innerText = `${CurrentClock[1]}\n${CurrentClock[5]}\n${price}`;
@@ -170,6 +172,7 @@ function RenderFunc(arg)
   }
 
   VitrinaContent.style.gridTemplateAreas = GridTemplateAreasStr;
+  CheckUserTovarInKorzina();
 }
 
 function MoveVitrinaFunc(arg)

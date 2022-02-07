@@ -12,6 +12,7 @@
     <title>TIMEZONE</title>
 </head>
 <body>
+
   <div class='wrapper'>
 
     <div class='TovarBox'>
@@ -35,7 +36,7 @@
       </div>
 
       <div class='TovarBoxFooter'>
-        <input type='button' value='Добавить в корзину'>
+        <input type='button' value='В корзину'>
       </div>
 
       <div class='CommentArea'>

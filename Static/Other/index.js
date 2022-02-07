@@ -4,18 +4,56 @@ var ShowBacket = $('.ShowBacket')[0],
     TovarBoxHeader = TovarBox.children[0],
     TovarBoxContent = TovarBox.children[1],
     TovarBoxFooter = TovarBox.children[2],
+    buttonWrapper = TovarBoxFooter.children[0],
     CommentWindow = $('.CommentWindow')[0],
     WriteCommentDiv = $('.WriteCommentDiv')[0],
     Stars = Array.from($('.Star')),
     checkClickOnStars = false,
     commentDiv = $('.CommentDiv')[0],
     id_clock,
+    id_clocks,
     LeftArrow = $('.LeftArrow')[0],
     RightArrow = $('.RightArrow')[0],
     CommentButtonsInd,
+    currentInd,
     ArrCommentId,
+    Korzina_Buttons,
     closeInput = TovarBox.children[0].lastElementChild;
+    
 
+TovarBoxFooter.querySelector('input[value="В корзину"]')
+              .addEventListener('click', AddTovarInKorzina);
+
+function CheckButton(buttonClock)
+{
+  F_str = CheckButton.caller.name;
+
+  if (F_str === 'ShowClock')
+  {
+    bool = buttonClock.style.backgroundColor = 'green' &&
+           buttonClock.value === 'В корзине';
+
+    if (bool)
+    {
+      buttonWrapper.style.backgroundColor = 'green';
+      buttonWrapper.style.cursor = 'default';
+      buttonWrapper.value = 'В корзине';
+      buttonWrapper.removeEventListener('click', AddTovarInKorzina);
+    }
+  }
+  else 
+  {
+    if ( buttonWrapper.style.backgroundColor === 'green' )
+    {
+      setTimeout(() => {
+        buttonWrapper.style.backgroundColor = '';
+        buttonWrapper.style.cursor = 'pointer';
+        buttonWrapper.value = 'В корзину';
+        buttonWrapper.addEventListener('click', AddTovarInKorzina);
+      }, 800)
+    }
+  }
+}
 
 function ShowClock()
 {
@@ -23,6 +61,10 @@ function ShowClock()
       DivSpanTxt = TovarDivChildrens[1].innerText,
       [Model, Price] = (DivSpanTxt.replace('\n', ' ')).split('\n'),
       Inf = $('.Inf')[0];
+
+  id_clock = event.target.parentNode.getAttribute('id');
+
+  CheckButton(this.parentNode.querySelector('input'));
 
   wrapper.style.visibility = 'visible';
   wrapper.style.opacity = '100%';
@@ -33,26 +75,42 @@ function ShowClock()
 
   $.ajax({
     method: 'POST',
-    data: {Model: Model.slice(Model.lastIndexOf(' ') + 1)},
+    data: {id_clock: id_clock},
     url: '/PHP_Scripts/GetClockInfo.php',
 
     success: function (arg) {
       arg = JSON.parse(arg);
       arg[3] = `Стекло: ${arg[3]}`;
 
-      id_clock = +arg[0];
-
       arg = arg.join(', ');
       
       TovarBoxContent.children[1].children[1].textContent = arg;
-      CheckCount();
+      CheckCount(ShowClock);
     }
   })
+
+  Korzina_Buttons = $('input[value="В корзину"]')[0];
 }
 
 function MoveComments()
 {
-  console.log(CommentButtonsInd);
+  let first = CommentButtonsInd[0],
+      last = CommentButtonsInd[CommentButtonsInd.length - 1];
+
+  if (currentInd === undefined) currentInd = first;
+
+  if (this.classList[0] === 'RightArrow' && currentInd !== last) currentInd++;
+  if (this.classList[0] === 'LeftArrow' && currentInd !== first) currentInd--;
+
+  if (currentInd === last) this.style.visibility = 'hidden';
+  if (currentInd + 1 === last) this.nextElementSibling.style.visibility = 'visible';
+
+  if (currentInd - 1 === first) this.previousElementSibling.style.visibility = 'visible';
+  if (currentInd === first) this.style.visibility = 'hidden';
+
+  TovarBox.scrollTo(0, 620);
+  commentDiv.innerHTML = '';
+  GetComment(currentInd);
 }
 
 function hiddenWrapper()
@@ -64,9 +122,11 @@ function hiddenWrapper()
   wrapper.style.opacity = '0%';
   wrapper.style.visibility = 'hidden';
 
+  commentDiv.innerHTML = '';
   CommentButtonsInd.length = 0;
+  CheckButton();
 
-  if (ArrCommentId.length !== 0) ArrCommentId.length = 0;
+  if (ArrCommentId?.length !== 0 && ArrCommentId !== undefined) ArrCommentId.length = 0;
 
   CommentWindow.value = '';
   
@@ -172,7 +232,7 @@ function ClickOnStar()
   }
 }
 
-function CheckCount()
+function CheckCount(callerFunc)
 {
   $.ajax({
     method: "POST",
@@ -183,8 +243,11 @@ function CheckCount()
       CommentButtonsInd = [...arg];
       Count = CommentButtonsInd.pop();
       
+      if (callerFunc === AddComment) return;
 
       $('.countComments')[0].nextElementSibling.innerText = Count;
+
+      if (CommentButtonsInd.length > 1) RightArrow.style.visibility = 'visible';
 
       GetComment(+CommentButtonsInd[0]);
     }
@@ -480,7 +543,8 @@ function GetComment(offset)
     success: function (arg) {
       
       arg = JSON.parse(arg);
-      ArrCommentId = [];
+      
+      if (ArrCommentId === undefined) ArrCommentId = [];
 
       for (i = 0; i < arg.length; i++)
       {
@@ -517,12 +581,15 @@ function AddComment()
     return;
   }
 
+  question = confirm('Вы уверены?');
+
+  if ( !question ) return;
+
   $.ajax({
     method: 'POST',
     url: '/PHP_Scripts/AddComment.php',
     data: {
       id_clock: id_clock,
-      date_add: new Date().toLocaleDateString(), 
       comment: WindowText.value, 
       mark: StarsCount
     },
@@ -534,12 +601,27 @@ function AddComment()
       likes = 0;
       dislikes = 0;
       
-      
+      if ( Array.isArray(ArrCommentId) )
+      {
+        ArrCommentId.push(arg[arg.length - 1]);
+      }
+      else 
+      {
+        ArrCommentId = [];
+        ArrCommentId.push(arg[arg.length - 1]);
+      }
 
       if ( commentDiv.children.length === 25 )
       {
-        old_child = commentDiv.children.lastElementChild;
+        old_child = commentDiv.lastElementChild;
         commentDiv.replaceChild(RenderComment(), old_child);
+
+        if ( getComputedStyle(RightArrow).visibility === 'hidden' )
+        {
+          RightArrow.style.visibility = 'visible';
+        }
+
+        CheckCount(AddComment);
       }
       else 
       {
@@ -554,17 +636,34 @@ function AddComment()
   })
 
   WindowText.value = '';
+  countValue = +($('.countComments')[0].nextElementSibling.innerText);
+  $('.countComments')[0].nextElementSibling
+                        .innerText = countValue + 1;
 }
 
 function AddTovarInKorzina()
 {
+  id_clock = event.target.parentNode.getAttribute('id');
 
+  $.ajax({
+    method: "POST",
+    url: '/PHP_Scripts/AddTovar.php',
+    data: {id_clock: id_clock},
+    success (arg) {
+      console.log(arg);
+    }
+  })
+
+  this.value = 'В корзине';
+  this.style.backgroundColor = 'green';
+  this.style.cursor = 'default';
+  this.removeEventListener('click', AddTovarInKorzina);
 }
 
 function AddEvent()
 {
   ShowBacket.addEventListener('click', () => {
-    location.href = '/Modules/Other/MyBacket.php';
+    location.href = '/Modules/Shop/backet/backet_user.php';
   })
 
   CommentWindow.addEventListener('scroll', checkWindow);
@@ -590,7 +689,49 @@ function AddEvent()
 
   $('input[value = "Очистить"]')[0].addEventListener('click', ClearButton);
   $('input[value = "Подтвердить"]')[0].addEventListener('click', AddComment);
-  wrapper.addEventListener('click', hiddenWrapper);
+  wrapper.addEventListener('mousedown', hiddenWrapper);
+}
+
+function CheckUserTovarInKorzina()
+{
+  function StartTimer()
+  {
+    setTimeout(() => {
+      current_clocks = id_clocks.filter(elem => $(`#${elem}`)[0]?.nodeName === 'DIV');
+
+      for (let i = 0; i < current_clocks.length; i++) {
+        current_input = [...$('input[value="В корзину"]')].filter(
+          elem => elem.parentNode.id === current_clocks[i]
+        )
+
+        current_input.forEach((elem) => {
+          elem.value = 'В корзине';
+          elem.style.backgroundColor = 'green';
+          elem.style.cursor = 'default';
+          elem.removeEventListener('click', AddTovarInKorzina);
+        });
+      }
+    }, 200);
+  }
+
+  if (CheckUserTovarInKorzina.caller === RenderFunc)
+  {
+    StartTimer();
+  }
+  else 
+  {
+    $.ajax({
+      method: "POST",
+      url: '../PHP_Scripts/CheckUserTovarInKorzina.php',
+      async: false,
+      success (arg) {
+        id_clocks = JSON.parse(arg);
+      }
+    })
+
+    StartTimer();
+  }
 }
 
 AddEvent();
+CheckUserTovarInKorzina();

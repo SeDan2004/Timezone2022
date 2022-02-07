@@ -1,9 +1,11 @@
 <?php 
 
-  $database = mysqli_connect('localhost', 'root', 'root', 'timezone_bd');
-  $model = $_POST['Model'];
+  require_once($_SERVER['DOCUMENT_ROOT'] . '/settings.php');
+
+  $database = mysqli_connect($HOST, $USER_DB, $PASSWORD_DB, $DATABASE);
+  $id_clock = $_POST['id_clock'];
   
-  $str = "SELECT * FROM `allclock` WHERE `model` = '$model'";
+  $str = "SELECT * FROM `allclock` WHERE `id` = '$id_clock'";
 
   $res = mysqli_query($database, $str);
   $res = mysqli_fetch_all($res)[0];

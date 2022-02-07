@@ -30,13 +30,14 @@
       $id_user,
       $_POST['comment'],
       $_POST['mark'],
-      $_POST['date_add'],
+      date('Y/m/d'),
       0,
       0
     );
 
     $res = mysqli_query($database, $format);
-    $arr = [ $_SESSION['login'], $_POST['mark'], $_POST['date_add'], $_POST['comment'] ];
+    $id = $database->insert_id;
+    $arr = [ $_SESSION['login'], $_POST['mark'], $_POST['date_add'], $_POST['comment'], $id ];
 
     echo json_encode($arr);
   }
@@ -53,13 +54,14 @@
     0,
     $_POST['comment'],
     $_POST['mark'],
-    $_POST['date_add'],
+    date('Y/m/d'),
     0,
     0
     );
 
     $res = mysqli_query($database, $format);
-    $arr = [ 'Аноним', $_POST['mark'], $_POST['date_add'], $_POST['comment'] ];
+    $id = $database->insert_id;
+    $arr = [ 'Аноним', $_POST['mark'], $_POST['date_add'], $_POST['comment'], $id ];
 
     echo json_encode($arr); 
   }

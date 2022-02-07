@@ -21,6 +21,8 @@ function AddClockInSliders()
 
           div = document.createElement('div');
           div.classList.add('Tovar');
+
+          div.setAttribute('id', elem[2]);
       
           span = document.createElement('span');
           span.innerText = `${elem[1]}\n${elem[5]}\n${(+elem[10]).toLocaleString() + ' Руб'}`;
